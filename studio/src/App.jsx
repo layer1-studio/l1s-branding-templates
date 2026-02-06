@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
   FileText, CreditCard, Briefcase, ShieldCheck, Quote,
   Receipt as ReceiptIcon, UserCheck, ClipboardList,
@@ -39,6 +39,7 @@ function App() {
   const [fontFamily, setFontFamily] = useState('Outfit');
   const [zoom, setZoom] = useState(0.65); // Default zoom at 65% for better visibility
   const [toast, setToast] = useState(null);
+  const iframeRef = useRef(null);
 
   const config = TEMPLATES_CONFIG[activeId];
 
@@ -194,7 +195,7 @@ function App() {
           </div>
 
           <div className="flex items-center gap-6" style={{ marginLeft: 'auto' }}>
-            <button onClick={() => window.print()} className="btn-primary shrink-0" style={{ padding: '10px 20px' }}>
+            <button onClick={() => iframeRef.current?.contentWindow?.print()} className="btn-primary shrink-0" style={{ padding: '10px 20px' }}>
               <Download size={16} /> <span style={{ fontSize: '12px' }}>Export PDF</span>
             </button>
           </div>
@@ -280,7 +281,7 @@ function App() {
                 width: '210mm',
                 height: '297mm'
               }}>
-                <iframe className="bg-white" style={{ width: '100%', height: '100%', border: 'none', borderRadius: '4px' }} srcDoc={renderedHtml} />
+                <iframe ref={iframeRef} className="bg-white" style={{ width: '100%', height: '100%', border: 'none', borderRadius: '4px' }} srcDoc={renderedHtml} />
               </div>
             </div>
           </div>
