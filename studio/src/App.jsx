@@ -22,12 +22,12 @@ const TEMPLATE_LIST = [
 ];
 
 const ACCENT_COLORS = [
+  { name: 'Blue', value: '#3b82f6' },
   { name: 'Indigo', value: '#6366f1' },
-  { name: 'Rose', value: '#fb7185' },
-  { name: 'Emerald', value: '#10b981' },
-  { name: 'Amber', value: '#f59e0b' },
-  { name: 'Sky', value: '#0ea5e9' },
-  { name: 'Violet', value: '#8b5cf6' },
+  { name: 'Purple', value: '#a855f7' },
+  { name: 'Green', value: '#10b981' },
+  { name: 'Grey', value: '#64748b' },
+  { name: 'Black', value: '#0f172a' },
 ];
 
 function App() {
