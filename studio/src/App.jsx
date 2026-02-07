@@ -3,7 +3,8 @@ import {
   FileText, CreditCard, Briefcase, ShieldCheck, Quote,
   Receipt as ReceiptIcon, UserCheck, ClipboardList,
   Download, Eye, Settings, Menu, X, Plus, ChevronRight,
-  Trash2, Palette, Type, Globe, CheckCircle, Banknote
+  Trash2, Palette, Type, Globe, CheckCircle, Banknote, HelpCircle
+
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TEMPLATES_CONFIG } from './constants/templates';
@@ -35,6 +36,7 @@ function App() {
   const [activeId, setActiveId] = useState('invoice');
   const [data, setData] = useState(TEMPLATES_CONFIG.invoice.initialData);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
   const [viewMode, setViewMode] = useState('editor');
   const [accentColor, setAccentColor] = useState('#6366f1');
   const [fontFamily, setFontFamily] = useState('Outfit');
@@ -158,6 +160,55 @@ function App() {
             <CheckCircle size={18} color="#10b981" /> {toast}
           </motion.div>
         )}
+        {showHelp && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setShowHelp(false)}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass"
+              style={{ width: '100%', maxWidth: '500px', padding: '32px', borderRadius: '24px', background: '#0f172a', border: '1px solid var(--border-white)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <h2 style={{ fontSize: '24px', fontWeight: 900, color: 'white' }}>Help & Support</h2>
+                <button onClick={() => setShowHelp(false)} className="btn-ghost" style={{ padding: '8px' }}><X size={20} /></button>
+              </div>
+
+              <div style={{ color: 'var(--text-muted)', fontSize: '14px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div>
+                  <h3 style={{ color: 'white', fontWeight: 700, fontSize: '16px', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: accentColor }}>◆</span> Need Assistance?
+                  </h3>
+                  <p style={{ lineHeight: '1.6' }}>If you have any questions or encounter issues while using the application, feel free to reach out to us:</p>
+                  <div style={{ marginTop: '12px', padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '12px' }}>
+                    <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span>Email:</span>
+                      <span style={{ color: 'white', textAlign: 'right' }}>w1956444@my.westminster.ac.uk<br />rachelcooray@gmail.com</span>
+                    </p>
+                    <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span>Phone:</span>
+                      <span style={{ color: 'white' }}>+94 77 177 0570</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 style={{ color: 'white', fontWeight: 700, fontSize: '16px', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ color: accentColor }}>◆</span> Feedback & Suggestions
+                  </h3>
+                  <p style={{ lineHeight: '1.6' }}>We’d love to hear from you! Share your thoughts or suggestions with us via email at:</p>
+                  <div style={{ marginTop: '12px', padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '12px' }}>
+                    <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span>Email:</span>
+                      <span style={{ color: 'white', textAlign: 'right' }}>w1956444@my.westminster.ac.uk<br />rachelcooray@gmail.com</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       <aside className={`sidebar glass flex flex-col p-8 ${sidebarOpen ? 'sidebar-expanded' : 'sidebar-collapsed'}`}>
@@ -182,9 +233,14 @@ function App() {
           ))}
         </nav>
 
-        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="btn-ghost" style={{ marginTop: '24px', padding: '12px' }}>
-          {sidebarOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
+        <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
+          <button onClick={() => setShowHelp(true)} className="btn-ghost" style={{ padding: '12px', flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <HelpCircle size={18} /> {sidebarOpen && <span style={{ marginLeft: '8px' }}>Help</span>}
+          </button>
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="btn-ghost" style={{ padding: '12px', flex: 0 }}>
+            {sidebarOpen ? <ChevronRight size={18} style={{ transform: 'rotate(180deg)' }} /> : <Menu size={18} />}
+          </button>
+        </div>
       </aside>
 
       <main className="h-full flex flex-col" style={{ flex: 1, position: 'relative', minWidth: 0 }}>
