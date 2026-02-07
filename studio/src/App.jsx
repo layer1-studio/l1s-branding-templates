@@ -3,7 +3,7 @@ import {
   FileText, CreditCard, Briefcase, ShieldCheck, Quote,
   Receipt as ReceiptIcon, UserCheck, ClipboardList,
   Download, Eye, Settings, Menu, X, Plus, ChevronRight,
-  Trash2, Palette, Type, Globe, CheckCircle
+  Trash2, Palette, Type, Globe, CheckCircle, Banknote
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TEMPLATES_CONFIG } from './constants/templates';
@@ -19,6 +19,7 @@ const TEMPLATE_LIST = [
   { id: 'service_letter', name: 'Service Letter', icon: UserCheck },
   { id: 'sow', name: 'Statement of Work', icon: ClipboardList },
   { id: 'appointment', name: 'Appointment', icon: Briefcase },
+  { id: 'payslip', name: 'Payslip', icon: Banknote },
 ];
 
 const ACCENT_COLORS = [

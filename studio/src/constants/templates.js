@@ -6,6 +6,8 @@ import receiptHtml from '../templates/receipt.html?raw';
 import serviceLetterHtml from '../templates/service_letter.html?raw';
 import sowHtml from '../templates/sow.html?raw';
 import appointmentHtml from '../templates/appointment.html?raw';
+import appointmentHtml from '../templates/appointment.html?raw';
+import payslipHtml from '../templates/payslip.html?raw';
 import stylesCss from '../templates/styles.css?raw';
 
 export const TEMPLATES_CONFIG = {
@@ -271,4 +273,58 @@ export const TEMPLATES_CONFIG = {
             signatory: { name: 'Rachel Cooray', title: 'Founder' }
         }
     },
+    payslip: {
+        name: 'Payslip',
+        html: payslipHtml,
+        css: stylesCss,
+        fields: [
+            { id: 'employee.name', label: 'Employee Name', type: 'text' },
+            { id: 'employee.id', label: 'Employee ID', type: 'text' },
+            { id: 'employee.designation', label: 'Designation', type: 'text' },
+            { id: 'pay_period', label: 'Pay Period', type: 'text' },
+            { id: 'pay_date', label: 'Pay Date', type: 'text' },
+            { id: 'tax_code', label: 'Tax Code', type: 'text' },
+            {
+                id: 'earnings', label: 'Earnings', type: 'list', fields: [
+                    { id: 'description', label: 'Description', type: 'text' },
+                    { id: 'amount', label: 'Amount', type: 'text' }
+                ]
+            },
+            {
+                id: 'deductions', label: 'Deductions', type: 'list', fields: [
+                    { id: 'description', label: 'Description', type: 'text' },
+                    { id: 'amount', label: 'Amount', type: 'text' }
+                ]
+            },
+            { id: 'total_earnings', label: 'Total Earnings', type: 'text' },
+            { id: 'total_deductions', label: 'Total Deductions', type: 'text' },
+            { id: 'net_pay', label: 'Net Pay', type: 'text' },
+            { id: 'bank.name', label: 'Bank Name', type: 'text' },
+            { id: 'bank.account_number', label: 'Account Number', type: 'text' },
+            { id: 'bank.sort_code', label: 'Sort Code', type: 'text' },
+        ],
+        initialData: {
+            employee: { name: 'Sarah Parker', id: 'L1-EMP-042', designation: 'Senior AI Engineer' },
+            pay_period: 'February 2026',
+            pay_date: 'February 28, 2026',
+            tax_code: '1257L',
+            earnings: [
+                { description: 'Basic Salary', amount: '£7,083.33' },
+                { description: 'Performance Bonus', amount: '£500.00' }
+            ],
+            deductions: [
+                { description: 'Income Tax', amount: '£1,450.20' },
+                { description: 'National Insurance', amount: '£480.00' },
+                { description: 'Pension', amount: '£354.17' }
+            ],
+            total_earnings: '£7,583.33',
+            total_deductions: '£2,284.37',
+            net_pay: '£5,298.96',
+            bank: {
+                name: 'Lloyds Bank',
+                account_number: '****5678',
+                sort_code: '30-94-55'
+            }
+        }
+    }
 };
