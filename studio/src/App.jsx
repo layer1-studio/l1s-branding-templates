@@ -100,6 +100,7 @@ function App() {
   const removeListItem = (path, index) => {
     let newData = _.cloneDeep(data);
     const list = _.get(newData, path, []);
+    const listLength = list.length;
     list.splice(index, 1);
     _.set(newData, path, list);
     newData = calculateTotals(newData);
@@ -265,7 +266,6 @@ function App() {
 
           <div style={{ flex: 1, position: 'relative', display: 'flex', justifyContent: 'center', padding: '80px', overflow: 'auto', backgroundColor: '#000' }}>
             <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: `radial-gradient(${accentColor} 1px, transparent 1px)`, backgroundSize: '40px 40px', pointerEvents: 'none' }} />
-
             <div style={{
               position: 'relative',
               transform: `scale(${zoom})`,
