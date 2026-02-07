@@ -263,7 +263,15 @@ function App() {
             </div>
           </div>
 
-          <div style={{ flex: 1, position: 'relative', display: 'flex', padding: '80px', overflow: 'auto', backgroundColor: '#000' }}>
+          <div style={{
+            flex: 1,
+            position: 'relative',
+            display: 'grid',
+            placeItems: 'center',
+            padding: '80px',
+            overflow: 'auto',
+            backgroundColor: '#000'
+          }}>
             <div style={{ position: 'absolute', inset: 0, opacity: 0.1, backgroundImage: `radial-gradient(${accentColor} 1px, transparent 1px)`, backgroundSize: '40px 40px', pointerEvents: 'none' }} />
 
             <div style={{
@@ -271,18 +279,18 @@ function App() {
               height: `${297 * zoom}mm`,
               transition: 'width 0.1s ease-out, height 0.1s ease-out',
               flexShrink: 0,
-              margin: 'auto',
-              position: 'relative'
+              position: 'relative',
+              background: 'white',
+              boxShadow: `0 80px 100px -20px rgba(0,0,0,0.8), 0 0 100px ${accentColor}10`
             }}>
               <div style={{
                 transform: `scale(${zoom})`,
                 transformOrigin: 'top left',
                 transition: 'transform 0.1s ease-out',
-                boxShadow: `0 80px 100px -20px rgba(0,0,0,0.8), 0 0 100px ${accentColor}10`,
                 width: '210mm',
                 height: '297mm'
               }}>
-                <iframe ref={iframeRef} className="bg-white" style={{ width: '100%', height: '100%', border: 'none', borderRadius: '4px' }} srcDoc={renderedHtml} />
+                <iframe ref={iframeRef} className="bg-white" style={{ width: '100%', height: '100%', border: 'none', borderRadius: '0' }} srcDoc={renderedHtml} />
               </div>
             </div>
           </div>
