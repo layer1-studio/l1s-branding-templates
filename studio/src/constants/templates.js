@@ -6,7 +6,6 @@ import receiptHtml from '../templates/receipt.html?raw';
 import serviceLetterHtml from '../templates/service_letter.html?raw';
 import sowHtml from '../templates/sow.html?raw';
 import appointmentHtml from '../templates/appointment.html?raw';
-import appointmentHtml from '../templates/appointment.html?raw';
 import payslipHtml from '../templates/payslip.html?raw';
 import stylesCss from '../templates/styles.css?raw';
 
