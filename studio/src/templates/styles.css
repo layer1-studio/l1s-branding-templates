@@ -28,6 +28,8 @@ body {
     width: 210mm;
     min-height: 297mm;
     padding: 20mm;
+    padding-bottom: 50mm;
+    /* Prevent content overlapping absolute footer */
     margin: 10mm auto;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -43,6 +45,10 @@ body {
     .page {
         margin: 0;
         box-shadow: none;
+        padding-top: 0;
+        /* Let @page handle top margin */
+        padding-bottom: 50mm;
+        /* Increased to prevent footer overlap on print */
     }
 }
 
@@ -192,4 +198,57 @@ td {
     font-weight: 600;
     font-size: 9pt;
     margin-bottom: 10px;
+}
+
+/* Rich Text / Letter Body Styles */
+.letter-body {
+    line-height: 1.6;
+    font-size: 11pt;
+    color: var(--text-main);
+}
+
+.letter-body p {
+    margin-bottom: 1.2em;
+    margin-top: 0;
+}
+
+.letter-body ul,
+.letter-body ol {
+    margin-bottom: 1.2em;
+    padding-left: 1.5em;
+    /* Adjusted padding */
+    list-style-position: outside;
+    margin-top: 0;
+}
+
+.letter-body li {
+    margin-bottom: 0.5em;
+    padding-left: 0;
+}
+
+/* Fix for nested lists */
+.letter-body ul ul,
+.letter-body ol ol,
+.letter-body ul ol,
+.letter-body ol ul {
+    margin-bottom: 0;
+}
+
+.letter-body strong,
+.letter-body b {
+    font-weight: 700;
+}
+
+.letter-body u {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.letter-body h1,
+.letter-body h2,
+.letter-body h3,
+.letter-body h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    color: var(--text-main);
 }

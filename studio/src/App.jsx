@@ -7,6 +7,7 @@ import {
 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import RichTextEditor from './components/RichTextEditor';
 import { TEMPLATES_CONFIG } from './constants/templates';
 import logo from './assets/logo.png';
 import _ from 'lodash';
@@ -114,7 +115,7 @@ function App() {
     let html = config.html;
     const brandingStyles = `
       :root { --primary: ${accentColor}; --font-main: '${fontFamily}', sans-serif; }
-      @page { size: A4; margin: 0; }
+      @page { size: A4; margin-top: 20mm; margin-bottom: 0; margin-left: 0; margin-right: 0; }
       body { margin: 0; padding: 0; width: 210mm; min-height: 297mm; overflow-x: hidden; }
       .page { width: 210mm; min-height: 297mm; margin: 0; box-shadow: none; overflow: hidden; }
       .badge { background: var(--primary) !important; }
@@ -135,14 +136,19 @@ function App() {
             return value.map(item => {
               let itemHtml = inner;
               for (const itemKey in item) {
+                // Determine if item[itemKey] is a rich text field based on structure? 
+                // Currently just replace string.
                 itemHtml = itemHtml.replace(new RegExp(`{{${itemKey}}}`, 'g'), item[itemKey]);
               }
               return itemHtml;
             }).join('');
           });
         } else {
-          html = html.replace(new RegExp(`{{${path}}}`, 'g'), value);
-          html = html.replace(new RegExp(`{{{${path}}}}`, 'g'), value);
+          // Check if this field corresponds to a rich text field? No need, value is HTML string.
+          // We assume 'body' is passed as HTML string.
+          // Note: replace(regex, string) might interpret '$' specially. Use a replacer function for safety.
+          html = html.replace(new RegExp(`{{${path}}}`, 'g'), () => value);
+          html = html.replace(new RegExp(`{{{${path}}}}`, 'g'), () => value);
         }
       }
     };
@@ -275,7 +281,12 @@ function App() {
                 config.fields.map(field => (
                   <div key={field.id} className="field-group">
                     <label className="field-label">{field.label}</label>
-                    {field.type === 'textarea' ? (
+                    {field.type === 'richtext' ? (
+                      <RichTextEditor
+                        value={_.get(data, field.id) || ''}
+                        onChange={(val) => handleFieldChange(field.id, val)}
+                      />
+                    ) : field.type === 'textarea' ? (
                       <textarea className="input-field" value={_.get(data, field.id) || ''} onChange={(e) => handleFieldChange(field.id, e.target.value)} />
                     ) : field.type === 'list' ? (
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

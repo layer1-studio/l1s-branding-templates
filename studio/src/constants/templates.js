@@ -76,7 +76,7 @@ export const TEMPLATES_CONFIG = {
             { id: 'date', label: 'Date', type: 'text' },
             { id: 'subject', label: 'Subject Line', type: 'text' },
             { id: 'salutation', label: 'Salutation', type: 'text' },
-            { id: 'body', label: 'Letter Body', type: 'textarea' },
+            { id: 'body', label: 'Letter Body', type: 'richtext' },
             { id: 'closing', label: 'Closing', type: 'text' },
             { id: 'signatory.name', label: 'Signatory Name', type: 'text' },
             { id: 'signatory.title', label: 'Signatory Title', type: 'text' },
